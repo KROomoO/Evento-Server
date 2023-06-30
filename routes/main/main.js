@@ -4,11 +4,15 @@ const router = express.Router();
 const mainList = require("./mainList"); //행사 리스트
 
 router.get("/", function (req, res) {
-    mainList.list(req, res);
+    mainList.guname(req, res);
 });
 
-router.get("/guname", function (req, res) {
-    mainList.guname(req, res);
+router.get("/guname/length", function (req, res) {
+    mainList.gunameLength(req, res);
+});
+
+router.get("/guname/list", function (req, res) {
+    mainList.gunameList(req, res);
 });
 
 module.exports = router;

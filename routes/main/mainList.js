@@ -7,7 +7,7 @@ let format = { language: "sql", indent: " " };
 const mysql = require("@config/mysql/db");
 
 const mainList = {
-    list: function (req, res) {
+    guname: function (req, res) {
         const param = req.body;
         const query = mainListMapper.getStatement(
             "listMapper",
@@ -19,7 +19,19 @@ const mainList = {
             res.json(result);
         });
     },
-    guname: function (req, res) {
+    gunameLength: function (req, res) {
+        const param = req.query;
+        const query = mainListMapper.getStatement(
+            "listMapper",
+            "laodSelectListLengthQuery",
+            param,
+            format
+        );
+        mysql.query(query, (error, result) => {
+            res.json(result);
+        });
+    },
+    gunameList: function (req, res) {
         const param = req.query;
         const query = mainListMapper.getStatement(
             "listMapper",

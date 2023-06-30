@@ -2,25 +2,60 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="listMapper">  
     <select id="loadGunameQuery">
-    SELECT DISTINCT
-        guname
-    FROM
-        evento
+        SELECT DISTINCT
+            guname
+        FROM
+            evento
+    </select>
+    <select id="laodSelectListLengthQuery">
+        SELECT
+            count(*) as "listLength"
+        FROM
+            evento
+        <choose>
+            <when test='selectGuname != "전체"'>
+                <where>
+                    <if test='selectGuname != ""'>
+                        guname = #{selectGuname}
+                    </if>
+                    <if test='checkedFree == "1"'>
+                        AND
+                            use_fee = '무료'
+                    </if>
+                </where>
+            </when>
+            <otherwise>
+                <if test='checkedFree == "1"'>
+                    WHERE
+                        use_fee = '무료'
+                </if>
+            </otherwise>
+        </choose>
     </select>
     <select id="loadSelectListQuery">
-    SELECT
-        id, use_fee, main_img, date, title
-    FROM
-        evento
-    <if test='selectGuname != "" or checkedFree != "0"'>
-    WHERE
-        <if test='selectGuname != ""'>
-            guname = #{selectGuname}
-        </if>
-        <if test='checkedFree == "1"'>
-            AND
-                use_fee = '무료'
-        </if>
-    </if>
+        SELECT
+            id, use_fee, main_img, date, title
+        FROM
+            evento
+        <choose>
+            <when test='selectGuname != "전체"'>
+                <where>
+                    <if test='selectGuname != ""'>
+                        guname = #{selectGuname}
+                    </if>
+                    <if test='checkedFree == "1"'>
+                        AND
+                            use_fee = '무료'
+                    </if>
+                </where>
+            </when>
+            <otherwise>
+                <if test='checkedFree == "1"'>
+                    WHERE
+                        use_fee = '무료'
+                </if>
+            </otherwise>
+        </choose>
+        LIMIT ${selectedPage}, 10
     </select>
 </mapper>
