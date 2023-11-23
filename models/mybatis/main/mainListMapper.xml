@@ -14,21 +14,37 @@
             evento
         <choose>
             <when test='selectGuname != "전체"'>
-                <where>
-                    <if test='selectGuname != ""'>
-                        guname = #{selectGuname}
-                    </if>
-                    <if test='checkedFree == "1"'>
-                        AND
-                            use_fee = '무료'
-                    </if>
-                </where>
+                WHERE guname = #{selectGuname}
+                <choose>
+                    <when test='checkedFree == "1"'>
+                        AND is_free = '무료'
+                        <if test='selectedMonth != "00"'>
+                            AND substring(date, 6, 2) = #{selectedMonth}
+                        </if>
+                    </when>
+                    <otherwise>
+                        <if test='selectedMonth != "00"'>
+                            AND substring(date, 6, 2) = #{selectedMonth}
+                        </if>
+                    </otherwise>
+                </choose>
             </when>
             <otherwise>
-                <if test='checkedFree == "1"'>
-                    WHERE
-                        use_fee = '무료'
-                </if>
+                <choose>
+                    <when test='checkedFree == "1"'>
+                        <where>
+                            is_free = '무료'
+                            <if test='selectedMonth != "00"'>
+                                AND substring(date, 6, 2) = #{selectedMonth}
+                            </if>
+                        </where>
+                    </when>
+                    <otherwise>
+                        <if test='selectedMonth != "00"'>
+                            WHERE substring(date, 6, 2) = #{selectedMonth}
+                        </if>
+                    </otherwise>
+                </choose>
             </otherwise>
         </choose>
     </select>
@@ -39,23 +55,46 @@
             evento
         <choose>
             <when test='selectGuname != "전체"'>
-                <where>
-                    <if test='selectGuname != ""'>
-                        guname = #{selectGuname}
-                    </if>
-                    <if test='checkedFree == "1"'>
-                        AND
-                            use_fee = '무료'
-                    </if>
-                </where>
+                WHERE guname = #{selectGuname}
+                <choose>
+                    <when test='checkedFree == "1"'>
+                        AND is_free = '무료'
+                        <if test='selectedMonth != "00"'>
+                            AND substring(date, 6, 2) = #{selectedMonth}
+                        </if>
+                    </when>
+                    <otherwise>
+                        <if test='selectedMonth != "00"'>
+                            AND substring(date, 6, 2) = #{selectedMonth}
+                        </if>
+                    </otherwise>
+                </choose>
             </when>
             <otherwise>
-                <if test='checkedFree == "1"'>
-                    WHERE
-                        use_fee = '무료'
-                </if>
+                <choose>
+                    <when test='checkedFree == "1"'>
+                        <where>
+                            is_free = '무료'
+                            <if test='selectedMonth != "00"'>
+                                AND substring(date, 6, 2) = #{selectedMonth}
+                            </if>
+                        </where>
+                    </when>
+                    <otherwise>
+                        <if test='selectedMonth != "00"'>
+                            WHERE substring(date, 6, 2) = #{selectedMonth}
+                        </if>
+                    </otherwise>
+                </choose>
             </otherwise>
         </choose>
         LIMIT ${selectedPage}, 10
+    </select>
+    <select id="loadSelectItemQuery">
+        SELECT
+            title, guname, place, date, rgstdate, main_img, org_link, use_trgt, is_free, lat, lot
+        FROM
+            evento
+        WHERE id = #{itemId}
     </select>
 </mapper>

@@ -19,7 +19,7 @@ const mainList = {
             res.json(result);
         });
     },
-    gunameLength: function (req, res) {
+    length: function (req, res) {
         const param = req.query;
         const query = mainListMapper.getStatement(
             "listMapper",
@@ -31,11 +31,23 @@ const mainList = {
             res.json(result);
         });
     },
-    gunameList: function (req, res) {
+    resultList: function (req, res) {
         const param = req.query;
         const query = mainListMapper.getStatement(
             "listMapper",
             "loadSelectListQuery",
+            param,
+            format
+        );
+        mysql.query(query, (error, result) => {
+            res.json(result);
+        });
+    },
+    item: function (req, res) {
+        const param = req.query;
+        const query = mainListMapper.getStatement(
+            "listMapper",
+            "loadSelectItemQuery",
             param,
             format
         );

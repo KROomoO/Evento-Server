@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="myPageMapper">
+    <select id="myScrapListQuery">
+    SELECT evento.main_img, evento.date, evento.title, evento.id
+    FROM user_scrap
+    JOIN evento ON user_scrap.scrap_id = evento.id
+    WHERE user_scrap.user_id = #{user_id};
+    </select>
+</mapper>
