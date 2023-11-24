@@ -36,8 +36,6 @@ const googleLogin = {
 
             return createToken(data.id, oAuth2Client.credentials.access_token);
         } catch (error) {
-            console.log("cc");
-            console.log(error);
             console.error(error.response.data);
             return error.response.status;
         }
