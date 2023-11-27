@@ -38,9 +38,7 @@ const naverLogin = {
                 user_id: userResponse.data.response.id,
             };
 
-            const checkUser = await userExists(userInfo);
-
-            console.log(checkUser);
+            await userExists(userInfo);
 
             return createToken(
                 userResponse.data.response.id,

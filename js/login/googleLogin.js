@@ -12,25 +12,19 @@ const oAuth2Client = new OAuth2Client(clientId, clientSecret, redirectUri);
 const googleLogin = {
     google_oAuth2_code: async (code) => {
         try {
-            console.log(code);
             const { tokens } = await oAuth2Client.getToken(code);
-            console.log(tokens);
+
             oAuth2Client.setCredentials(tokens);
 
-            console.log(oAuth2Client);
             const { data } = await oAuth2Client.request({
                 url: "https://www.googleapis.com/oauth2/v2/userinfo",
             });
-
-            console.log(data);
 
             const userInfo = {
                 user_id: data.id,
             };
 
-            const checkUser = await userExists(userInfo);
-
-            console.log(checkUser);
+            await userExists(userInfo);
 
             return createToken(data.id, oAuth2Client.credentials.access_token);
         } catch (error) {
