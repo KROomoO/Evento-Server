@@ -17,9 +17,12 @@ const googleLogin = {
             console.log(tokens);
             oAuth2Client.setCredentials(tokens);
 
+            console.log(oAuth2Client);
             const { data } = await oAuth2Client.request({
                 url: "https://www.googleapis.com/oauth2/v2/userinfo",
             });
+
+            console.log(data);
 
             const userInfo = {
                 user_id: data.id,
