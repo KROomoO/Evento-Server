@@ -36,7 +36,6 @@ const naverLogin = {
 
             const userInfo = {
                 user_id: userResponse.data.response.id,
-                refresh_token: response.data.refresh_token,
             };
 
             const checkUser = await userExists(userInfo);

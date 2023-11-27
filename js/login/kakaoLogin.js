@@ -43,7 +43,6 @@ const kakaoLogin = {
 
             const userInfo = {
                 user_id: userResponse.data.id,
-                refresh_token: response.data.refresh_token,
             };
 
             const checkUser = await userExists(userInfo);

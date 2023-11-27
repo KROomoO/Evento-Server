@@ -7,12 +7,7 @@
         WHERE user_id = #{user_id}
     </select>
     <insert id="saveUserQuery" parameterType="map">
-        INSERT INTO user_info (user_id, refresh_token) 
-        VALUES (#{user_id}, #{refresh_token})
+        INSERT INTO user_info (user_id) 
+        VALUES (#{user_id})
     </insert>
-    <update id="updateUserQuery" parameterType="map">
-        UPDATE user_info
-        SET refresh_token = #{refresh_token}
-        WHERE user_id = #{user_id}
-    </update>
 </mapper>

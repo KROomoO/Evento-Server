@@ -21,37 +21,17 @@ const checkUser = async (userInfo) => {
         format
     );
 
-    const updateQuery = loginMapper.getStatement(
-        "loginMapper",
-        "updateUserQuery",
-        userInfo,
-        format
-    );
-
     const checkUser = await new Promise((resolve, reject) => {
         mysql.query(checkQuery, (error, result) => {
             if (error) {
                 reject(error);
             } else {
-                console.log("사용자 이미 존재");
                 resolve(result[0].userCount);
             }
         });
     });
 
-    if (checkUser > 0) {
-        const updateUser = await new Promise((resolve, reject) => {
-            mysql.query(updateQuery, (error, result) => {
-                if (error) {
-                    reject("사용자 업데이트 실패");
-                } else {
-                    resolve("사용자 업데이트 성공");
-                }
-            });
-        });
-
-        return updateUser;
-    } else {
+    if (checkUser <= 0) {
         const saveUser = await new Promise((resolve, reject) => {
             mysql.query(saveQuery, (error, result) => {
                 if (error) {
