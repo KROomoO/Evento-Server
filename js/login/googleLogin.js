@@ -12,9 +12,7 @@ const oAuth2Client = new OAuth2Client(clientId, clientSecret, redirectUri);
 const googleLogin = {
     google_oAuth2_code: async (code) => {
         try {
-            console.log(code);
             const { tokens } = await oAuth2Client.getToken(code);
-            console.log(tokens);
 
             oAuth2Client.setCredentials(tokens);
 
