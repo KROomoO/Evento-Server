@@ -43,8 +43,6 @@ const kakaoLogin = {
 
             const userInfo = {
                 user_id: userResponse.data.id,
-                email: userResponse.data.kakao_account.email,
-                name: null,
                 refresh_token: response.data.refresh_token,
             };
 

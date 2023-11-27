@@ -36,8 +36,6 @@ const naverLogin = {
 
             const userInfo = {
                 user_id: userResponse.data.response.id,
-                email: userResponse.data.response.email,
-                name: userResponse.data.response.name,
                 refresh_token: response.data.refresh_token,
             };
 

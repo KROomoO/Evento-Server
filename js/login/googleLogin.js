@@ -22,12 +22,7 @@ const googleLogin = {
 
             const userInfo = {
                 user_id: data.id,
-                email: data.email,
-                name: data.name,
-                refresh_token:
-                    oAuth2Client.credentials.refresh_token !== undefined
-                        ? oAuth2Client.credentials.refresh_token
-                        : null,
+                refresh_token: oAuth2Client.credentials.refresh_token,
             };
 
             const checkUser = await userExists(userInfo);
