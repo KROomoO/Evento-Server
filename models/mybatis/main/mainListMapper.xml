@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="listMapper">  
+    <select id="loadGunameQuery">
+        SELECT DISTINCT
+            guname
+        FROM
+            evento
+    </select>
+    <select id="laodSelectListLengthQuery">
+        SELECT
+            count(*) as "listLength"
+        FROM
+            evento
+        <choose>
+            <when test='selectGuname != "전체"'>
+                WHERE guname = #{selectGuname}
+                <choose>
+                    <when test='checkedFree == "1"'>
+                        AND is_free = '무료'
+                        <if test='selectedMonth != "00"'>
+                            AND substring(date, 6, 2) = #{selectedMonth}
+                        </if>
+                    </when>
+                    <otherwise>
+                        <if test='selectedMonth != "00"'>
+                            AND substring(date, 6, 2) = #{selectedMonth}
+                        </if>
+                    </otherwise>
+                </choose>
+            </when>
+            <otherwise>
+                <choose>
+                    <when test='checkedFree == "1"'>
+                        <where>
+                            is_free = '무료'
+                            <if test='selectedMonth != "00"'>
+                                AND substring(date, 6, 2) = #{selectedMonth}
+                            </if>
+                        </where>
+                    </when>
+                    <otherwise>
+                        <if test='selectedMonth != "00"'>
+                            WHERE substring(date, 6, 2) = #{selectedMonth}
+                        </if>
+                    </otherwise>
+                </choose>
+            </otherwise>
+        </choose>
+    </select>
+    <select id="loadSelectListQuery">
+        SELECT
+            id, use_fee, main_img, date, title
+        FROM
+            evento
+        <choose>
+            <when test='selectGuname != "전체"'>
+                WHERE guname = #{selectGuname}
+                <choose>
+                    <when test='checkedFree == "1"'>
+                        AND is_free = '무료'
+                        <if test='selectedMonth != "00"'>
+                            AND substring(date, 6, 2) = #{selectedMonth}
+                        </if>
+                    </when>
+                    <otherwise>
+                        <if test='selectedMonth != "00"'>
+                            AND substring(date, 6, 2) = #{selectedMonth}
+                        </if>
+                    </otherwise>
+                </choose>
+            </when>
+            <otherwise>
+                <choose>
+                    <when test='checkedFree == "1"'>
+                        <where>
+                            is_free = '무료'
+                            <if test='selectedMonth != "00"'>
+                                AND substring(date, 6, 2) = #{selectedMonth}
+                            </if>
+                        </where>
+                    </when>
+                    <otherwise>
+                        <if test='selectedMonth != "00"'>
+                            WHERE substring(date, 6, 2) = #{selectedMonth}
+                        </if>
+                    </otherwise>
+                </choose>
+            </otherwise>
+        </choose>
+        LIMIT ${selectedPage}, 10
+    </select>
+    <select id="loadSelectItemQuery">
+        SELECT
+            title, guname, place, date, rgstdate, main_img, org_link, use_trgt, is_free, lat, lot
+        FROM
+            evento
+        WHERE id = #{itemId}
+    </select>
+</mapper>

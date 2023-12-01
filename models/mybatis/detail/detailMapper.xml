@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="detailMapper">
+    <select id="checkScrapQuery">
+    SELECT COUNT(*) as checkScrap
+    FROM user_scrap
+    WHERE user_id = #{user_id} AND scrap_id = #{post_id}
+    </select>
+    <insert id="saveScrapQuery">
+    INSERT INTO user_scrap (user_id, scrap_id)
+    VALUES (#{user_id}, #{post_id})
+    </insert>
+    <delete id="deleteScrapQuery">
+    DELETE FROM user_scrap
+    WHERE user_id = #{user_id} AND scrap_id = #{post_id}
+    </delete>
+</mapper>

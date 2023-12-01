@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="loginMapper">
+    <select id="checkUserQuery">
+        SELECT COUNT(*) as userCount
+        FROM user_info
+        WHERE user_id = #{user_id}
+    </select>
+    <insert id="saveUserQuery" parameterType="map">
+        INSERT INTO user_info (user_id) 
+        VALUES (#{user_id})
+    </insert>
+</mapper>
