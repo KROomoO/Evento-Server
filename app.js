@@ -32,5 +32,5 @@ app.use("/api/login", loginRouter);
 app.use("/api/mypage", myPageRouter);
 
 app.listen(port, () => {
-    console.log(`Server Running on PORT : ${port}`);
+    console.log(`Server Running on PORT : ${port}!`);
 });
