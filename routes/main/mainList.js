@@ -23,7 +23,7 @@ const mainList = {
         const param = req.query;
         const query = mainListMapper.getStatement(
             "listMapper",
-            "laodSelectListLengthQuery",
+            "loadSelectListLengthQuery",
             param,
             format
         );

@@ -7,7 +7,7 @@
         FROM
             evento
     </select>
-    <select id="laodSelectListLengthQuery">
+    <select id="loadSelectListLengthQuery">
         SELECT
             count(*) as "listLength"
         FROM
