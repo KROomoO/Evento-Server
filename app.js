@@ -18,7 +18,7 @@ moduleAlias.addAliases({
     "@config": __dirname + "/config",
 });
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8080;
 
 /** 라우팅 모듈 선언 */
 const mainRouter = require("./routes/main/main");
