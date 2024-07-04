@@ -8,5 +8,3 @@ const generateRandomString = (length) => {
 };
 
 const secretKey = generateRandomString(64);
-
-console.log(secretKey);
